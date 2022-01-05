@@ -1,5 +1,5 @@
 const restaurant = {
-  name: 'Classico Italiano',
+  rName: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
@@ -7,43 +7,61 @@ const restaurant = {
   orderFood(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+  openHours: {
+    thursday: {
+      open: 12,
+      close: 22,
+    },
+    friday: {
+      open: 12,
+      close: 23,
+    },
+    saturday: {
+      open: 0, //open 24*7
+      close: 24,
+    },
+  },
+  stafReport({ fName, age, job }) {
+    console.log(`Hi I'm ${fName}, I'm ${age} old working as ${job}`);
+  },
 };
 
-// Destructuring all elements of categories Array
-console.log('----DESTRUCTURING----');
-const [a, b, c, d] = restaurant.categories;
-console.log(a, b, c, d);
+restaurant.stafReport({
+  fName: 'Yasir',
+  age: 23,
+  job: 'chef',
+});
 
-//Destructuring the 1st, 3rd, and 4rth element
-// to do that we will simply leave the hole between commas
-console.log('----SKIP ELEMENT----');
-const [x, , y, z] = restaurant.categories;
-console.log(x, y, z);
+//To destructure objects we use curly braces
+//Use exact names of props in variables that are to be destructured.
 
-//Destructuring 1st and 2nd element with reverse order
-//solution#1 old way
-console.log('----ORDER CHANGE Sol-1----');
-let [first, second, third, fourth] = restaurant.categories;
-console.log(first, second);
-/* const temp = first;
-first = second;
-second = temp;
-console.log(first, second); */
-//solution#2 new way
-console.log('----ORDER CHANGE Sol-2----');
-[first, second, third, fourth] = [second, third, fourth, first];
-console.log(first, second, third, fourth);
+//const { rName, categories, openHours } = restaurant;
+//console.log(rName, categories, openHours);
 
-//Destructuring on Function returning Array.
-const [food1, food2] = restaurant.orderFood(2, 0);
-console.log(food1, food2);
+// Destructuring with different props name
+//let { rName: restName, categories, openHours } = restaurant;
+//console.log(restName, categories, openHours);
 
-//Destructuring from nested Arrays, which means destructuring inside destructuring
-const nestedArray = [1, 2, [3, 4], 5, 6];
-const [nest1, , [nest2]] = nestedArray;
-console.log(nest1, nest2);
+//Default Value for menu Object
+//const { rName: restName, categories, openHours, menu = {} } = restaurant;
+//console.log(restName, categories, openHours, menu);
 
-//Destructuring -setting default values
-const defValue = [1, 2, [3, 4]];
-const [defV1, , [defV2], defV3 = 1] = defValue;
-console.log(defV1, defV2, defV3);
+//Default Value for menu as Array
+//const { rName: restName, categories, openHours, menu = [] } = restaurant;
+//console.log(restName, categories, openHours, menu);
+
+//Mutating variable while Destructuring objects
+// let a = 100;
+// let b = 200;
+
+// const object = { a: 23, b: 111, c: 100, d: 300 };
+// ({ a, b } = object); // mutating object
+// console.log(object);
+
+//opening hours for friday
+// const {
+//   openHours: {
+//     friday: { open, close },
+//   },
+// } = restaurant;
+// console.log(`on Friday we are open fron ${open} to ${close}`);
