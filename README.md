@@ -1,0 +1,3 @@
+## Destructuring Arrays
+
+code snippet
